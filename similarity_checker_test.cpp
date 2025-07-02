@@ -17,6 +17,7 @@ TEST_F(SimilarityFixture, Length) {
 	calculateLengthScore("ABC", "ABCDE", 20);
 	calculateLengthScore("ABCDE", "ABC", 20);
 	calculateLengthScore("A", "BB", 0);
+	calculateLengthScore("AAAAAAA", "BB", 0);
 }
 
 int main() {
