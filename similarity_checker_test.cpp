@@ -4,35 +4,20 @@
 
 using namespace testing;
 
-class BaseballFixture : public Test {
+class SimilarityFixture : public Test {
 public:
-
+	SimilarityChecker similarity;
+	void calculateLengthScore(const string &str1, const string& str2, int expected) {
+		EXPECT_EQ(expected, similarity.checkLength(str1, str2));
+	}
 };
 
-TEST(SimilarityChecker, Length) {
-	SimilarityChecker similarity;
-	int result = 0;
-	result = similarity.checkLength("ABCDE", "ABCDE");
-
-	EXPECT_EQ(60, result);
+TEST_F(SimilarityFixture, Length) {
+	calculateLengthScore("ABCDE", "ABCDE", 60);
+	calculateLengthScore("ABC", "ABCDE", 20);
+	calculateLengthScore("ABCDE", "ABC", 20);
+	calculateLengthScore("A", "BB", 0);
 }
-
-TEST(SimilarityChecker, Length1) {
-	SimilarityChecker similarity;
-	int result = 0;
-	result = similarity.checkLength("ABC", "ABCDE");
-
-	EXPECT_EQ(20, result);
-}
-
-TEST(SimilarityChecker, Length2) {
-	SimilarityChecker similarity;
-	int result = 0;
-	result = similarity.checkLength("ABCDE", "ABC");
-
-	EXPECT_EQ(20, result);
-}
-
 
 int main() {
 	testing::InitGoogleMock();
